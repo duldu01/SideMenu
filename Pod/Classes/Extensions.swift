@@ -110,7 +110,11 @@ internal extension UIPanGestureRecognizer {
 
 internal extension UIApplication {
 
-    var keyWindow: UIWindow? {
-        return UIApplication.shared.windows.filter { $0.isKeyWindow }.first
-    }
+		var keyWindow: UIWindow? {
+#if !APP_EXTENSION
+				return UIApplication.shared.windows.filter { $0.isKeyWindow }.first
+#else
+				return nil	
+#endif
+		}
 }
