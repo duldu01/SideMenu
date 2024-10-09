@@ -107,14 +107,10 @@ internal extension UIPanGestureRecognizer {
             } ?? 0
     }
 }
-
+@available(iOSApplicationExtension, unavailable)
 internal extension UIApplication {
 
 		var keyWindow: UIWindow? {
-#if !APP_EXTENSION
 				return UIApplication.shared.windows.filter { $0.isKeyWindow }.first
-#else
-				return nil	
-#endif
 		}
 }

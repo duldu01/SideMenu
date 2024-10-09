@@ -8,6 +8,7 @@
 import UIKit
 
 // Deprecations; to be removed at a future date.
+@available(iOSApplicationExtension, unavailable)
 extension SideMenuManager {
 
     @available(*, deprecated, renamed: "leftMenuNavigationController")
@@ -210,7 +211,9 @@ extension SideMenuPresentationStyle {
 }
 
 @available(*, deprecated, renamed: "SideMenuNavigationController")
+@available(iOSApplicationExtension, unavailable)
 public typealias UISideMenuNavigationController = SideMenuNavigationController
 
 @available(*, deprecated, renamed: "SideMenuNavigationControllerDelegate")
+@available(iOSApplicationExtension, unavailable)
 public typealias UISideMenuNavigationControllerDelegate = SideMenuNavigationControllerDelegate

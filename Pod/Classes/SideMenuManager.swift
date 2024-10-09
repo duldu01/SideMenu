@@ -8,6 +8,7 @@
 import UIKit
 
 @objcMembers
+@available(iOSApplicationExtension, unavailable)
 public class SideMenuManager: NSObject {
 
     final private class SideMenuPanGestureRecognizer: UIPanGestureRecognizer {}
@@ -78,6 +79,7 @@ public class SideMenuManager: NSObject {
 
      - Returns: The array of screen edge gestures added to `toView`.
      */
+		@available(iOSApplicationExtension, unavailable)
     @discardableResult public func addScreenEdgePanGesturesToPresent(toView view: UIView) -> [UIScreenEdgePanGestureRecognizer] {
         return [
             addScreenEdgePanGesturesToPresent(toView: view, forMenu: .left),
@@ -93,6 +95,7 @@ public class SideMenuManager: NSObject {
  
      - Returns: The screen edge gestures added to `toView`.
      */
+		@available(iOSApplicationExtension, unavailable)
     @discardableResult public func addScreenEdgePanGesturesToPresent(toView view: UIView, forMenu side: PresentDirection) -> UIScreenEdgePanGestureRecognizer {
         if menu(forSide: side) == nil {
             let methodName = #function // "addScreenEdgePanGesturesToPresent"
@@ -109,6 +112,7 @@ public class SideMenuManager: NSObject {
      
      - Returns: The pan gesture added to `toView`.
      */
+		@available(iOSApplicationExtension, unavailable)
     @discardableResult public func addPanGestureToPresent(toView view: UIView) -> UIPanGestureRecognizer {
         if leftMenuNavigationController ?? rightMenuNavigationController == nil {
             Print.warning(.panGestureAdded, arguments: #function, PresentDirection.left.name, PresentDirection.right.name, required: true)
@@ -118,6 +122,7 @@ public class SideMenuManager: NSObject {
     }
 }
 
+@available(iOSApplicationExtension, unavailable)
 internal extension SideMenuManager {
 
     func setMenu(_ menu: Menu?, forLeftSide leftSide: Bool) {
@@ -136,6 +141,7 @@ internal extension SideMenuManager {
     }
 }
 
+@available(iOSApplicationExtension, unavailable)
 private extension SideMenuManager {
 
     @objc func handlePresentMenuScreenEdge(_ gesture: UIScreenEdgePanGestureRecognizer) {
@@ -213,16 +219,14 @@ private extension SideMenuManager {
         }
         return SideMenuPanGestureRecognizer(addTo: view, target: self, action: #selector(handlePresentMenuPan(_:)))
     }
-
+		
+		@available(iOSApplicationExtension, unavailable)
     var topMostViewController: UIViewController? {
-#if !APP_EXTENSION
 				return UIApplication.shared.keyWindow?.rootViewController?.topMostViewController
-#else
-				return nil
-#endif
     }
 }
 
+@available(iOSApplicationExtension, unavailable)
 extension SideMenuManager: SideMenuNavigationControllerTransitionDelegate {
 
     internal func sideMenuTransitionDidDismiss(menu: Menu) {
