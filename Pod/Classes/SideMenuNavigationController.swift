@@ -62,6 +62,7 @@ internal protocol MenuModel {
     var pushStyle: SideMenuPushStyle { get }
 }
 
+@available(iOSApplicationExtension, unavailable)
 @objc public protocol SideMenuNavigationControllerDelegate {
     @objc optional func sideMenuWillAppear(menu: SideMenuNavigationController, animated: Bool)
     @objc optional func sideMenuDidAppear(menu: SideMenuNavigationController, animated: Bool)
@@ -69,10 +70,12 @@ internal protocol MenuModel {
     @objc optional func sideMenuDidDisappear(menu: SideMenuNavigationController, animated: Bool)
 }
 
-internal protocol SideMenuNavigationControllerTransitionDelegate: class {
+@available(iOSApplicationExtension, unavailable)
+internal protocol SideMenuNavigationControllerTransitionDelegate: AnyObject {
     func sideMenuTransitionDidDismiss(menu: Menu)
 }
 
+@available(iOSApplicationExtension, unavailable)
 public struct SideMenuSettings: Model, InitializableStruct {
     public var allowPushOfSameClassTwice: Bool = true
     public var alwaysAnimate: Bool = true
@@ -89,11 +92,7 @@ public struct SideMenuSettings: Model, InitializableStruct {
     public var enableTapToDismissGesture: Bool = true
     public var initialSpringVelocity: CGFloat = 1
     public var menuWidth: CGFloat = {
-#if !APP_EXTENSION
 				let appScreenRect = UIApplication.shared.keyWindow?.bounds ?? UIWindow().bounds
-#else
-				let appScreenRect = UIWindow().bounds
-#endif
         let minimumSize = min(appScreenRect.width, appScreenRect.height)
         return min(round(minimumSize * 0.75), 240)
     }()
@@ -108,10 +107,12 @@ public struct SideMenuSettings: Model, InitializableStruct {
     public init() {}
 }
 
+@available(iOSApplicationExtension, unavailable)
 internal typealias Menu = SideMenuNavigationController
 typealias Model = MenuModel & PresentationModel & AnimationModel
 
 @objcMembers
+@available(iOSApplicationExtension, unavailable)
 open class SideMenuNavigationController: UINavigationController {
     
     private lazy var _leftSide = Protected(false) { [weak self] oldValue, newValue in
@@ -339,6 +340,7 @@ open class SideMenuNavigationController: UINavigationController {
 }
 
 // Interface
+@available(iOSApplicationExtension, unavailable)
 extension SideMenuNavigationController: Model {
 
     @IBInspectable open var allowPushOfSameClassTwice: Bool {
@@ -463,6 +465,7 @@ extension SideMenuNavigationController: Model {
     }
 }
 
+@available(iOSApplicationExtension, unavailable)
 extension SideMenuNavigationController: SideMenuTransitionControllerDelegate {
 
     func sideMenuTransitionController(_ transitionController: SideMenuTransitionController, didDismiss viewController: UIViewController) {
@@ -476,6 +479,7 @@ extension SideMenuNavigationController: SideMenuTransitionControllerDelegate {
     }
 }
 
+@available(iOSApplicationExtension, unavailable)
 internal extension SideMenuNavigationController {
 
     func handleMenuPan(_ gesture: UIPanGestureRecognizer, _ presenting: Bool) {
@@ -517,6 +521,7 @@ internal extension SideMenuNavigationController {
     }
 }
 
+@available(iOSApplicationExtension, unavailable)
 private extension SideMenuNavigationController {
 
     weak var activeDelegate: SideMenuNavigationControllerDelegate? {
